@@ -5,6 +5,8 @@
 /*
   CSS custom properties — default palette (neutral blue).
   These are overridden at runtime by colorExtractor.ts when a logo is present.
+  Dark mode defaults match Tailwind's gray-900/gray-800 to preserve the
+  original appearance when no logo is provided.
 */
 :root {
   --color-primary:        hsl(217, 91%, 50%);
@@ -13,7 +15,7 @@
   --color-primary-ring:   hsl(217, 91%, 50%);
   --color-bg:             hsl(0, 0%, 100%);
   --color-bg-card:        hsl(0, 0%, 100%);
-  --color-bg-subtle:      hsl(217, 30%, 97%);
+  --color-bg-subtle:      hsl(0, 0%, 97%);
   --color-text:           hsl(0, 0%, 9%);
   --color-text-muted:     hsl(0, 0%, 45%);
   --color-border:         hsl(0, 0%, 88%);
@@ -24,19 +26,20 @@
   --color-warning-text:   hsl(35, 80%, 30%);
 }
 
+/* Dark mode defaults — match original Tailwind gray-900/gray-800 values */
 .dark {
   --color-primary:        hsl(217, 91%, 60%);
   --color-primary-hover:  hsl(217, 91%, 70%);
-  --color-primary-light:  hsl(217, 30%, 15%);
+  --color-primary-light:  hsl(217, 30%, 20%);
   --color-primary-ring:   hsl(217, 91%, 60%);
-  --color-bg:             hsl(217, 15%, 7%);
-  --color-bg-card:        hsl(217, 12%, 12%);
-  --color-bg-subtle:      hsl(217, 20%, 10%);
+  --color-bg:             hsl(0, 0%, 11%);   /* gray-900 */
+  --color-bg-card:        hsl(0, 0%, 17%);   /* gray-800 */
+  --color-bg-subtle:      hsl(0, 0%, 15%);
   --color-text:           hsl(0, 0%, 95%);
   --color-text-muted:     hsl(0, 0%, 60%);
-  --color-border:         hsl(217, 15%, 20%);
-  --color-nav-bg:         hsl(217, 15%, 7%);
-  --color-skeleton:       hsl(217, 12%, 16%);
+  --color-border:         hsl(0, 0%, 25%);
+  --color-nav-bg:         hsl(0, 0%, 11%);   /* gray-900 */
+  --color-skeleton:       hsl(0, 0%, 20%);   /* gray-800 */
   --color-warning-bg:     hsl(45, 40%, 12%);
   --color-warning-border: hsl(45, 50%, 25%);
   --color-warning-text:   hsl(45, 80%, 70%);
