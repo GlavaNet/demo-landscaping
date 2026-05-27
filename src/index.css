@@ -1,3 +1,99 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+  CSS custom properties — default palette (neutral blue).
+  These are overridden at runtime by colorExtractor.ts when a logo is present.
+*/
+:root {
+  --color-primary:        hsl(217, 91%, 50%);
+  --color-primary-hover:  hsl(217, 91%, 40%);
+  --color-primary-light:  hsl(217, 91%, 95%);
+  --color-primary-ring:   hsl(217, 91%, 50%);
+  --color-bg:             hsl(0, 0%, 100%);
+  --color-bg-card:        hsl(0, 0%, 100%);
+  --color-bg-subtle:      hsl(217, 30%, 97%);
+  --color-text:           hsl(0, 0%, 9%);
+  --color-text-muted:     hsl(0, 0%, 45%);
+  --color-border:         hsl(0, 0%, 88%);
+  --color-nav-bg:         hsl(0, 0%, 100%);
+  --color-skeleton:       hsl(0, 0%, 92%);
+  --color-warning-bg:     hsl(45, 90%, 96%);
+  --color-warning-border: hsl(45, 80%, 80%);
+  --color-warning-text:   hsl(35, 80%, 30%);
+}
+
+.dark {
+  --color-primary:        hsl(217, 91%, 60%);
+  --color-primary-hover:  hsl(217, 91%, 70%);
+  --color-primary-light:  hsl(217, 30%, 15%);
+  --color-primary-ring:   hsl(217, 91%, 60%);
+  --color-bg:             hsl(217, 15%, 7%);
+  --color-bg-card:        hsl(217, 12%, 12%);
+  --color-bg-subtle:      hsl(217, 20%, 10%);
+  --color-text:           hsl(0, 0%, 95%);
+  --color-text-muted:     hsl(0, 0%, 60%);
+  --color-border:         hsl(217, 15%, 20%);
+  --color-nav-bg:         hsl(217, 15%, 7%);
+  --color-skeleton:       hsl(217, 12%, 16%);
+  --color-warning-bg:     hsl(45, 40%, 12%);
+  --color-warning-border: hsl(45, 50%, 25%);
+  --color-warning-text:   hsl(45, 80%, 70%);
+}
+
+/* ── Semantic utility classes ─────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 rounded-md text-white transition-colors
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: var(--color-primary);
+    --tw-ring-color: var(--color-primary-ring);
+  }
+  .btn-primary:hover  { background-color: var(--color-primary-hover); }
+  .btn-primary:disabled {
+    @apply cursor-not-allowed;
+    background-color: hsl(0, 0%, 65%);
+  }
+
+  .card {
+    @apply rounded-xl shadow-md p-6 transition-transform hover:scale-[1.02];
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    --tw-ring-color: var(--color-primary-ring);
+  }
+  .input-field.error {
+    border-color: hsl(0, 72%, 51%);
+    --tw-ring-color: hsl(0, 72%, 51%);
+  }
+
+  .nav-link {
+    @apply px-4 py-2 rounded-md transition-colors;
+    color: var(--color-text-muted);
+  }
+  .nav-link:hover  { color: var(--color-text); }
+  .nav-link.active {
+    color: var(--color-text);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .warning-banner {
+    @apply px-4 py-3 rounded-lg text-sm flex items-center justify-between gap-3;
+    background-color: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-border);
+    color: var(--color-warning-text);
+  }
+}
+
+/* ── Base overrides ───────────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

@@ -19,10 +19,14 @@ export const Footer = () => {
   }, [instagramHandle]);
 
   return (
-    <footer className="w-full bg-white dark:bg-gray-900 shadow-sm mt-12" role="contentinfo">
+    <footer
+      className="w-full shadow-sm mt-12"
+      style={{ backgroundColor: 'var(--color-nav-bg)', borderTop: '1px solid var(--color-border)' }}
+      role="contentinfo"
+    >
       <div className="max-w-5xl mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
             © {currentYear} {businessName}. All rights reserved.
           </p>
           {instagramUrl && (
@@ -31,7 +35,10 @@ export const Footer = () => {
               target="_blank"
               rel="me noopener noreferrer"
               aria-label={`${businessName} on Instagram`}
-              className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+              className="transition-colors"
+              style={{ color: 'var(--color-text-muted)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-primary)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
             >
               <Instagram size={20} aria-hidden="true" />
               <span className="sr-only">Instagram</span>

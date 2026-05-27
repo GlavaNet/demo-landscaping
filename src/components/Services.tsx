@@ -6,10 +6,6 @@ interface Service {
   description: string;
 }
 
-/**
- * Services page — replace the items in the `services` array with
- * the actual offerings for each client before deploying.
- */
 export const Services = () => {
   const businessName = useMemo(
     () => import.meta.env.VITE_BUSINESS_NAME?.trim() || 'We',
@@ -41,23 +37,32 @@ export const Services = () => {
 
   return (
     <div className="max-w-5xl mx-auto pt-8 px-4">
-      <h2 className="text-3xl font-semibold mb-2 text-center dark:text-white">
+      <h2
+        className="text-3xl font-semibold mb-2 text-center"
+        style={{ color: 'var(--color-text)' }}
+      >
         What We Do
       </h2>
-      <p className="text-center text-gray-500 dark:text-gray-400 mb-10">
+      <p
+        className="text-center mb-10"
+        style={{ color: 'var(--color-text-muted)' }}
+      >
         Quality work on every project, every time.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {services.map((service) => (
-          <div
-            key={service.id}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-transform hover:scale-[1.02]"
-          >
-            <h3 className="text-xl font-semibold mb-3 dark:text-white">
+          <div key={service.id} className="card">
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{ color: 'var(--color-text)' }}
+            >
               {service.title}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p
+              className="leading-relaxed"
+              style={{ color: 'var(--color-text-muted)' }}
+            >
               {service.description}
             </p>
           </div>
