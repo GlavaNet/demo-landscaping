@@ -37,6 +37,7 @@ cp .env.example .env
 | `VITE_CONTACT_EMAIL` | Shown on the Contact page |
 | `VITE_CONTACT_PHONE` | Shown on the Contact page |
 | `VITE_BIO` | Short tagline shown on the home page |
+| `VITE_FORMSPREE_ID` | Form ID from formspree.io (enables contact form submissions) |
 | `VITE_INSTAGRAM_HANDLE` | Optional — adds an Instagram link to the footer |
 
 ### 3. Set up the Google Drive folder
@@ -68,8 +69,10 @@ To confirm the folder is publicly accessible before deploying, open a new **Inco
 ### 4. Set up Formspree (contact form)
 
 1. Go to [formspree.io](https://formspree.io) and create a free account
-2. Create a new form — copy the form ID (looks like `xabcdefg`)
-3. In `src/components/ContactInfo.tsx`, replace `YOUR_FORMSPREE_ID` with your ID
+2. Create a new form — copy the form ID from the dashboard (looks like `xabcdefg`)
+3. Add that ID as the value for `VITE_FORMSPREE_ID` in your `.env` or GitHub Secrets
+
+No code changes needed — the contact form reads the ID from the environment automatically. If `VITE_FORMSPREE_ID` is not set, the form will display a warning and the submit button will be disabled.
 
 ### 5. Run locally
 
@@ -99,10 +102,10 @@ Push to `main` — GitHub Actions builds and deploys automatically.
 | What to change | Where |
 |---|---|
 | Business name, phone, email | GitHub Secrets |
+| Formspree form ID | GitHub Secrets (`VITE_FORMSPREE_ID`) |
 | Service descriptions | `src/components/Services.tsx` |
 | Logo | Replace `public/images/logo-light.png` and `public/images/logo-dark.png` |
 | Photo gallery | Client adds/removes photos in their Google Drive folder |
-| Contact form destination | Formspree dashboard (no code change needed) |
 
 ---
 
