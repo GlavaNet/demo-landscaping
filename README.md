@@ -5,7 +5,7 @@ Photos are pulled live from a Google Drive folder — no CMS, no logins, no manu
 
 ## How it works
 
-1. Business owner creates a Google Drive folder and shares it publicly (Viewer)
+1. Business owner creates a Google Drive folder and makes it publicly viewable
 2. They upload job photos to the folder
 3. The site automatically displays those photos in the gallery
 4. New photos appear on the site immediately — no code changes needed
@@ -39,13 +39,31 @@ cp .env.example .env
 | `VITE_BIO` | Short tagline shown on the home page |
 | `VITE_INSTAGRAM_HANDLE` | Optional — adds an Instagram link to the footer |
 
-### 3. Get a Google Drive folder ID
+### 3. Set up the Google Drive folder
 
-1. Create a new folder in Google Drive
-2. Right-click → **Share** → change to **"Anyone with the link"** → **Viewer**
-3. Copy the folder ID from the URL:
-   `https://drive.google.com/drive/folders/`**`THIS_IS_THE_ID`**
-4. Paste it as `VITE_GOOGLE_DRIVE_FOLDER_ID` in your `.env`
+#### Create and share the folder
+
+1. Go to [drive.google.com](https://drive.google.com) and create a new folder
+2. Upload your photos into that folder
+3. Right-click the folder and select **Share**
+4. In the sharing dialog, find the **General access** section near the bottom
+5. Click the dropdown (it likely says **Restricted**) and change it to **Anyone with the link**
+6. Make sure the role is set to **Viewer**
+7. Click **Done**
+
+#### Get the folder ID
+
+1. Open the folder in Google Drive by clicking on it
+2. Look at the URL in your browser's address bar — it will look like this:
+   ```
+   https://drive.google.com/drive/folders/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs
+   ```
+3. The folder ID is everything after `/folders/` — in this example: `1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs`
+4. Copy that ID and paste it as the value for `VITE_GOOGLE_DRIVE_FOLDER_ID`
+
+#### Verify it's working
+
+To confirm the folder is publicly accessible before deploying, open a new **Incognito/Private** browser window and paste the folder URL. If you can see the photos without being logged in, the sharing is set up correctly.
 
 ### 4. Set up Formspree (contact form)
 
