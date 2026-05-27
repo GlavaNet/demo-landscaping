@@ -22,9 +22,11 @@ export const ContactInfo = () => {
 
   const contactEmail = useMemo(() => import.meta.env.VITE_CONTACT_EMAIL?.trim() || '', []);
   const contactPhone = useMemo(() => import.meta.env.VITE_CONTACT_PHONE?.trim() || '', []);
-
-  // Replace YOUR_FORMSPREE_ID with the actual ID from formspree.io/new
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+  const formspreeId = useMemo(() => import.meta.env.VITE_FORMSPREE_ID?.trim() || '', []);
+  const formspreeEndpoint = useMemo(
+    () => formspreeId ? `https://formspree.io/f/${formspreeId}` : '',
+    [formspreeId]
+  );
 
   const validate = useCallback((data: FormData): FormErrors => {
     const errs: FormErrors = {};
@@ -50,8 +52,14 @@ export const ContactInfo = () => {
       return;
     }
 
+    if (!formspreeEndpoint) {
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(formspreeEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -81,7 +89,6 @@ export const ContactInfo = () => {
         Ready to get started? Send us a message and we'll get back to you quickly.
       </p>
 
-      {/* Direct contact info */}
       {(contactPhone || contactEmail) && (
         <div className="flex flex-wrap justify-center gap-6 mb-8 text-gray-600 dark:text-gray-300">
           {contactPhone && (
@@ -97,8 +104,13 @@ export const ContactInfo = () => {
         </div>
       )}
 
+      {!formspreeId && (
+        <div className="mb-6 px-4 py-3 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg text-amber-800 dark:text-amber-200 text-sm">
+          Set <code className="font-mono font-semibold">VITE_FORMSPREE_ID</code> in your environment to enable form submissions.
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        {/* Name */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
           <input
@@ -110,7 +122,6 @@ export const ContactInfo = () => {
           {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
         </div>
 
-        {/* Email */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
           <input
@@ -122,7 +133,6 @@ export const ContactInfo = () => {
           {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
         </div>
 
-        {/* Phone (optional) */}
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Phone <span className="text-gray-400">(optional)</span>
@@ -135,7 +145,6 @@ export const ContactInfo = () => {
           />
         </div>
 
-        {/* Message */}
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Tell us about your project
@@ -151,9 +160,11 @@ export const ContactInfo = () => {
 
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !formspreeId}
           className={`w-full px-4 py-2 text-white rounded-md transition-colors flex items-center justify-center gap-2 ${
-            isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+            isSubmitting || !formspreeId
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
           }`}
         >
           {isSubmitting ? 'Sending…' : <><SendIcon size={18} /> Send Message</>}

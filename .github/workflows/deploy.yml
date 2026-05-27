@@ -28,6 +28,7 @@ jobs:
           VITE_CONTACT_PHONE: ${{ secrets.VITE_CONTACT_PHONE }}
           VITE_BIO: ${{ secrets.VITE_BIO }}
           VITE_INSTAGRAM_HANDLE: ${{ secrets.VITE_INSTAGRAM_HANDLE }}
+          VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
         run: npm run build
 
       - name: Deploy

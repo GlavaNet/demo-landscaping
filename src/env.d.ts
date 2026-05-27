@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly VITE_CONTACT_PHONE: string;
   readonly VITE_BIO: string;
   readonly VITE_INSTAGRAM_HANDLE: string;
+  readonly VITE_FORMSPREE_ID: string;
 }
 
 interface ImportMeta {
