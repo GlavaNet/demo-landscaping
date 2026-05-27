@@ -3,46 +3,61 @@
 @tailwind utilities;
 
 /*
-  CSS custom properties — default palette (neutral blue).
+  CSS custom properties — default palette.
+  Light/dark defaults use Tailwind's exact color hex values to ensure
+  pixel-perfect parity with the original hardcoded Tailwind classes.
   These are overridden at runtime by colorExtractor.ts when a logo is present.
-  Dark mode defaults match Tailwind's gray-900/gray-800 to preserve the
-  original appearance when no logo is provided.
 */
 :root {
-  --color-primary:        hsl(217, 91%, 50%);
-  --color-primary-hover:  hsl(217, 91%, 40%);
-  --color-primary-light:  hsl(217, 91%, 95%);
-  --color-primary-ring:   hsl(217, 91%, 50%);
-  --color-bg:             hsl(0, 0%, 100%);
-  --color-bg-card:        hsl(0, 0%, 100%);
-  --color-bg-subtle:      hsl(0, 0%, 97%);
-  --color-text:           hsl(0, 0%, 9%);
-  --color-text-muted:     hsl(0, 0%, 45%);
-  --color-border:         hsl(0, 0%, 88%);
-  --color-nav-bg:         hsl(0, 0%, 100%);
-  --color-skeleton:       hsl(0, 0%, 92%);
-  --color-warning-bg:     hsl(45, 90%, 96%);
-  --color-warning-border: hsl(45, 80%, 80%);
-  --color-warning-text:   hsl(35, 80%, 30%);
+  /* Tailwind blue-600 / blue-700 */
+  --color-primary:        #2563eb;
+  --color-primary-hover:  #1d4ed8;
+  --color-primary-light:  #eff6ff;
+  --color-primary-ring:   #2563eb;
+  /* Tailwind white / gray-50 */
+  --color-bg:             #ffffff;
+  --color-bg-card:        #ffffff;
+  --color-bg-subtle:      #f9fafb;
+  /* Tailwind gray-900 / gray-400 */
+  --color-text:           #111827;
+  --color-text-muted:     #6b7280;
+  /* Tailwind gray-200 */
+  --color-border:         #e5e7eb;
+  --color-nav-bg:         #ffffff;
+  /* Tailwind gray-100 */
+  --color-skeleton:       #f3f4f6;
+  /* Amber warning */
+  --color-warning-bg:     #fffbeb;
+  --color-warning-border: #fcd34d;
+  --color-warning-text:   #92400e;
 }
 
-/* Dark mode defaults — match original Tailwind gray-900/gray-800 values */
+/* Dark mode — Tailwind's exact gray-900/gray-800/gray-400 hex values */
 .dark {
-  --color-primary:        hsl(217, 91%, 60%);
-  --color-primary-hover:  hsl(217, 91%, 70%);
-  --color-primary-light:  hsl(217, 30%, 20%);
-  --color-primary-ring:   hsl(217, 91%, 60%);
-  --color-bg:             hsl(0, 0%, 11%);   /* gray-900 */
-  --color-bg-card:        hsl(0, 0%, 17%);   /* gray-800 */
-  --color-bg-subtle:      hsl(0, 0%, 15%);
-  --color-text:           hsl(0, 0%, 95%);
-  --color-text-muted:     hsl(0, 0%, 60%);
-  --color-border:         hsl(0, 0%, 25%);
-  --color-nav-bg:         hsl(0, 0%, 11%);   /* gray-900 */
-  --color-skeleton:       hsl(0, 0%, 20%);   /* gray-800 */
-  --color-warning-bg:     hsl(45, 40%, 12%);
-  --color-warning-border: hsl(45, 50%, 25%);
-  --color-warning-text:   hsl(45, 80%, 70%);
+  /* Tailwind blue-500 / blue-400 */
+  --color-primary:        #3b82f6;
+  --color-primary-hover:  #60a5fa;
+  --color-primary-light:  #1e3a5f;
+  --color-primary-ring:   #3b82f6;
+  /* Tailwind gray-900 */
+  --color-bg:             #172033; /* midnight blue */
+  /* Tailwind gray-800 */
+  --color-bg-card:        #1f2d45; /* slightly lighter */
+  /* between gray-800 and gray-900 */
+  --color-bg-subtle:      #1b2840;
+  /* Tailwind gray-100 / gray-400 */
+  --color-text:           #f3f4f6;
+  --color-text-muted:     #9ca3af;
+  /* Tailwind gray-700 */
+  --color-border:         #374151;
+  /* Tailwind gray-900 */
+  --color-nav-bg:         #172033;
+  /* Tailwind gray-800 */
+  --color-skeleton:       #1f2937;
+  /* Amber warning dark */
+  --color-warning-bg:     #1c1407;
+  --color-warning-border: #78490f;
+  --color-warning-text:   #fbbf24;
 }
 
 /* ── Semantic utility classes ─────────────────────────────────────────────── */
@@ -53,10 +68,10 @@
     background-color: var(--color-primary);
     --tw-ring-color: var(--color-primary-ring);
   }
-  .btn-primary:hover  { background-color: var(--color-primary-hover); }
+  .btn-primary:hover    { background-color: var(--color-primary-hover); }
   .btn-primary:disabled {
     @apply cursor-not-allowed;
-    background-color: hsl(0, 0%, 65%);
+    background-color: #9ca3af;
   }
 
   .card {
@@ -73,8 +88,8 @@
     --tw-ring-color: var(--color-primary-ring);
   }
   .input-field.error {
-    border-color: hsl(0, 72%, 51%);
-    --tw-ring-color: hsl(0, 72%, 51%);
+    border-color: #ef4444;
+    --tw-ring-color: #ef4444;
   }
 
   .nav-link {
