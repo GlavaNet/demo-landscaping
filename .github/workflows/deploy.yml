@@ -22,6 +22,7 @@ jobs:
 
       - name: Build
         env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.VITE_GOOGLE_DRIVE_FOLDER_ID }}
           VITE_BUSINESS_NAME: ${{ secrets.VITE_BUSINESS_NAME }}
           VITE_CONTACT_EMAIL: ${{ secrets.VITE_CONTACT_EMAIL }}
