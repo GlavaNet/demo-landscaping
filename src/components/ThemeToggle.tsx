@@ -31,9 +31,13 @@ export const ThemeToggle = ({ className = '' }: ThemeToggleProps) => {
       role="switch"
       aria-checked={theme === 'dark'}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-      className={`p-2 rounded-md text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100
-        transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
-        ${className}`.trim()}
+      className={`p-2 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${className}`.trim()}
+      style={{
+        color: 'var(--color-text-muted)',
+        '--tw-ring-color': 'var(--color-primary-ring)',
+      } as React.CSSProperties}
+      onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
+      onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
     >
       {theme === 'light'
         ? <Moon size={20} aria-hidden="true" />
